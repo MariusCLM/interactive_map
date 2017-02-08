@@ -1,7 +1,3 @@
-# interactive map
-
-SSH key added
+# Interactive Map
 
 by Marius
-
-modif by Olivier
