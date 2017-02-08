@@ -1,26 +1,52 @@
-var map = document.querySelector('#map')
-var paths = map.querySelectorAll('.map__image a')
-var links = map.querySelectorAll('.map__list a')
+$( window ).on( "load", function() {
+  console.log( "window loaded" );
+  nodeNames = [];
+  $("a").each(function(i) {
+    //console.log( $( this ).attr("title") );
+    nodeNames[ i ] = "<li><a id=\"list-" + $(this).attr("id") + "\" href=\"map2/departement.php?id=" + $(this).attr("id")+ "\">" + $(this).attr("xlink:title") + "</a></li>";
+  });
+  $( "<ul></ul>" ).append( nodeNames.join( "" ) ).appendTo($( "#map__list" ));
 
-// Polyfill du forEach
-if (NodeList.prototype.forEach === undefined) {
-  NodeList.prototype.forEach = function (callback) {
-    [].forEach.call(this, callback)
+  console.log( "lines written" );
+
+  var map = document.querySelector('#map')
+  var paths = map.querySelectorAll('.map__image a')
+  var links = map.querySelectorAll('.map__list a')
+
+  // Polyfill du forEach
+  if (NodeList.prototype.forEach === undefined) {
+    NodeList.prototype.forEach = function (callback) {
+      [].forEach.call(this, callback)
+    }
   }
-}
 
-paths.forEach(function (path) {
-  path.addEventListener('mouseover', function (e) {
-      var id = this.id.replace('region-','')
-      /*map.querySelectorAll('.is-active').forEach(function (item){
-        item.classList.remove('is-active')
-      })*/
-      document.querySelector('#list-' + id).classList.add('is-active')
+  paths.forEach(function (path) {
+    path.addEventListener('mouseover', function (e) {
+        /*map.querySelectorAll('.is-active').forEach(function (item){
+          item.classList.remove('is-active')
+        })*/
+        document.querySelector('#list-' + this.id).classList.add('is-active')
+        document.querySelector('#' + this.id).classList.add('is-active')
+    })
+    path.addEventListener('mouseout', function (e) {
+        document.querySelector('#list-' + this.id).classList.remove('is-active')
+        document.querySelector('#' + this.id).classList.remove('is-active')
+    })
+  })
+
+  links.forEach(function (link) {
+    alert("ok");
+    link.addEventListener('mouseover', function () {
+      var id = this.id.replace('list-','')
       document.querySelector('#' + id).classList.add('is-active')
+      document.querySelector('#' + this.id).classList.add('is-active')
+    })
+    link.addEventListener('mouseout', function (e) {
+      var id = this.id.replace('list-','')
+      document.querySelector('#' + id).classList.add('is-active')
+      document.querySelector('#' + this.id).classList.add('is-active')
+    })
   })
-  path.addEventListener('mouseout', function (e) {
-      var id = this.id.replace('region-','')
-      document.querySelector('#list-' + id).classList.remove('is-active')
-      document.querySelector('#' + id).classList.remove('is-active')
-  })
-})
+
+
+});
