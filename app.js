@@ -10,12 +10,17 @@ if (NodeList.prototype.forEach === undefined) {
 }
 
 paths.forEach(function (path) {
-  path.addEventListener('mouseenter', function (e) {
+  path.addEventListener('mouseover', function (e) {
       var id = this.id.replace('region-','')
-      map.querySelectorAll('.is-active').forEach(function (item){
+      /*map.querySelectorAll('.is-active').forEach(function (item){
         item.classList.remove('is-active')
-      })
+      })*/
       document.querySelector('#list-' + id).classList.add('is-active')
       document.querySelector('#' + id).classList.add('is-active')
+  })
+  path.addEventListener('mouseout', function (e) {
+      var id = this.id.replace('region-','')
+      document.querySelector('#list-' + id).classList.remove('is-active')
+      document.querySelector('#' + id).classList.remove('is-active')
   })
 })
