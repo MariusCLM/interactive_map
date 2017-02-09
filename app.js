@@ -9,44 +9,41 @@ $( window ).on( "load", function() {
 
   console.log( "lines written" );
 
-  var map = document.querySelector('#map')
-  var paths = map.querySelectorAll('.map__image a')
-  var links = map.querySelectorAll('.map__list a')
+  var map = document.querySelector('#map');
+  var paths = map.querySelectorAll('#map__image a');
+  var links = map.querySelectorAll('#map__list a');
 
   // Polyfill du forEach
   if (NodeList.prototype.forEach === undefined) {
     NodeList.prototype.forEach = function (callback) {
-      [].forEach.call(this, callback)
+      [].forEach.call(this, callback);
     }
   }
 
   paths.forEach(function (path) {
-    path.addEventListener('mouseover', function (e) {
-        /*map.querySelectorAll('.is-active').forEach(function (item){
-          item.classList.remove('is-active')
-        })*/
-        document.querySelector('#list-' + this.id).classList.add('is-active')
-        document.querySelector('#' + this.id).classList.add('is-active')
-    })
-    path.addEventListener('mouseout', function (e) {
-        document.querySelector('#list-' + this.id).classList.remove('is-active')
-        document.querySelector('#' + this.id).classList.remove('is-active')
-    })
-  })
+    path.addEventListener('mouseover', function () {
+      /*map.querySelectorAll('.is-active').forEach(function (item){
+         item.classList.remove('is-active')
+       })*/
+      document.querySelector('#list-' + this.id).classList.add('is-active');
+      document.querySelector('#' + this.id).classList.add('is-active');
+    });
+    path.addEventListener('mouseout', function () {
+      document.querySelector('#list-' + this.id).classList.remove('is-active');
+      document.querySelector('#' + this.id).classList.remove('is-active');
+    });
+  });
 
   links.forEach(function (link) {
-    alert("ok");
     link.addEventListener('mouseover', function () {
-      var id = this.id.replace('list-','')
-      document.querySelector('#' + id).classList.add('is-active')
-      document.querySelector('#' + this.id).classList.add('is-active')
-    })
-    link.addEventListener('mouseout', function (e) {
-      var id = this.id.replace('list-','')
-      document.querySelector('#' + id).classList.add('is-active')
-      document.querySelector('#' + this.id).classList.add('is-active')
-    })
-  })
-
-
+      var id = this.id.replace('list-','');
+      document.querySelector('#' + id).classList.add('is-active');
+      document.querySelector('#' + this.id).classList.add('is-active');
+    });
+    link.addEventListener('mouseout', function () {
+      var id = this.id.replace('list-','');
+      document.querySelector('#' + id).classList.remove('is-active');
+      document.querySelector('#' + this.id).classList.remove('is-active');
+    });
+  });
 });

@@ -1,6 +1,6 @@
 a {
   text-decoration: none;
-  color: #000;ock;
+  color: #000;
   list-style: none;
 }
 
@@ -11,7 +11,7 @@ a {
 
 .map__image path{
   stroke:#fff;
-  stroke-widht:1px;
+  stroke-width:1px;
   transition: fill 0.3s;
 }
 
@@ -33,6 +33,6 @@ a {
 }
 
 #map__list a.is-active{
-  color: #blue;
+  color: blue;
   text-decoration: underline;
 }
